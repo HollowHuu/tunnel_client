@@ -39,3 +39,26 @@ class Moonraker:
             self.connected = False
 
     async def check_state(self):
+        # JSON RPC request to the websocket server
+        # jsonrpc: "2.0"
+        # method: "server.info"
+        # "id": 9546
+
+        request_data = {
+            "jsonrpc": "2.0",
+            "method": "server.info",
+            "id": 9546
+        }
+        if not self.connected or not self.ws:
+            print("Not connected to Moonraker")
+            return
+
+        try:
+            await self.ws.send(json.dumps(request_data))
+            print("Sent request to Moonraker")
+            response = await self.ws.recv()
+            print(f"Received response: {response}")
+
+        except Exception as e:
+            print(f"Error while sending request to Moonraker: {e}")
+            self.connected = False

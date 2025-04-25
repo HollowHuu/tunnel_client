@@ -7,7 +7,7 @@ import json
 import moonraker
 
 RELAY_URL = "ws://localhost:9001"
-MOONRAKER_URL = "ws://192.168.0.129:7125/klippysocket"
+MOONRAKER_URL = "ws://localhost:7125/klippysocket"
 
 
 class ServerConnection:
